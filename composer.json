@@ -1,0 +1,33 @@
+{
+    "name": "demvsystems/exec",
+    "license": "MIT",
+    "description": "A Wrapper for exec and it's results",
+    "type": "library",
+    "homepage": "https://github.com/demvsystems/exec",
+    "keywords": [
+        "exec",
+        "command"
+    ],
+    "authors": [
+        {
+            "name": "DEMV-Systems",
+            "email": "developer@demv.de",
+            "homepage": "https://github.com/demvsystems"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.0",
+        "demvsystems/core": "0.*.*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "5.*.*"
+    },
+    "autoload": {
+        "psr-4": {"Demv\\Exec\\": "src/"}
+    },
+    "autoload-dev": {
+        "classmap": [
+            "tests/"
+        ]
+    }
+}
