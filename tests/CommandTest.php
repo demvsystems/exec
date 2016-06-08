@@ -92,7 +92,7 @@ class CommandTest extends PHPUnit_Framework_TestCase
      */
     public function testAwkApp()
     {
-        $input = 'foo bar';
+        $input    = 'foo bar';
         $expected = 'bar';
 
         $result = Command::create()
@@ -111,7 +111,7 @@ class CommandTest extends PHPUnit_Framework_TestCase
     public function testXargsApp()
     {
         $expected = 'foo' . PHP_EOL . 'bar' . PHP_EOL . 'baz' . PHP_EOL;
-        $result = Command::create()
+        $result   = Command::create()
             ->xargsApp()
             ->input('echo', 'echo')
             ->arg('d,')
@@ -133,5 +133,29 @@ class CommandTest extends PHPUnit_Framework_TestCase
 
         //Because of async we are only awaiting the pid
         $this->assertGreaterThan(0, (int) $result->getRaw());
+    }
+
+    public function testIsRunning()
+    {
+        $cmd    = Command::create();
+        $result = $cmd->phpApp()
+            ->arg('r')
+            ->input('\'sleep(10);\'')
+            ->async()
+            ->exec();
+
+        $this->assertTrue($cmd->isRunning());
+    }
+
+    public function testIsSimilarRunning()
+    {
+        $cmd = Command::create();
+        $result = $cmd->phpApp()
+            ->arg('r')
+            ->input('\'sleep(10);\'')
+            ->async()
+            ->exec();
+
+        $this->assertTrue($cmd->isSimilarRunning());
     }
 }
