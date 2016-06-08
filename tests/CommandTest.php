@@ -122,4 +122,16 @@ class CommandTest extends PHPUnit_Framework_TestCase
             ->exec();
         $this->assertEquals($expected, $result->getRaw());
     }
+
+    public function testAsync()
+    {
+        $result = Command::create()
+            ->app('echo')
+            ->input('"Hello World"')
+            ->async()
+            ->exec();
+
+        //Because of async we are only awaiting the pid
+        $this->assertGreaterThan(0, (int) $result->getRaw());
+    }
 }

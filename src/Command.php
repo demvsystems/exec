@@ -7,8 +7,8 @@ use Demv\Exec\Application\AwkApp;
 use Demv\Exec\Application\PhpApp;
 use Demv\Exec\Application\YiiApp;
 use Demv\Exec\Application\XargsApp;
-
-use Demv\Exec\Exception\OsNoMatchException; use Demv\Exec\Result\Result;
+use Demv\Exec\Exception\OsNoMatchException;
+use Demv\Exec\Result\Result;
 
 /**
  * The command is the highest unit, which consists of one or more application calls
@@ -24,6 +24,11 @@ class Command
      * @var string
      */
     private $os = OS::ALL;
+
+    /**
+     * @var bool
+     */
+    private $async = false;
 
     /**
      * Create a new command
@@ -51,6 +56,7 @@ class Command
     public function exec()
     {
         $this->checkOs();
+
         exec($this->getRaw(), $output);
 
         return new Result($output);
@@ -75,12 +81,24 @@ class Command
      */
     public function getRaw()
     {
-        return implode(' | ', array_map(
+        $command = implode(' | ', array_map(
             function (App $app) {
                 return $app->getRaw();
             },
             $this->apps
         ));
+
+        if ($this->async) {
+            $current_os = strtoupper(substr(PHP_OS, 0, 3));
+            if ($current_os === OS::WIN) {
+                //TODO: This is experimental and not tested
+                $command = 'start ' . $command;
+            } else {
+                $command .= ' &> /dev/null & echo $!';
+            }
+        }
+
+        return $command;
     }
 
     /**
@@ -108,6 +126,18 @@ class Command
     public function setOS(string $os)
     {
         $this->os = $os;
+
+        return $this;
+    }
+
+    /**
+     * Enable async of this command
+     *
+     * @return Command
+     */
+    public function async()
+    {
+        $this->async = true;
 
         return $this;
     }
