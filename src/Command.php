@@ -8,7 +8,6 @@ use Demv\Exec\Application\PhpApp;
 use Demv\Exec\Application\YiiApp;
 use Demv\Exec\Application\XargsApp;
 use Demv\Exec\Exception\OsNoMatchException;
-use Demv\Exec\Exception\OsNotSupportedExeception;
 use Demv\Exec\Result\Result;
 
 /**
@@ -25,16 +24,6 @@ class Command
      * @var string
      */
     private $os = OS::ALL;
-
-    /**
-     * @var bool
-     */
-    private $async = false;
-
-    /**
-     * @var int
-     */
-    private $pid = 0;
 
     /**
      * Create a new command
@@ -65,10 +54,6 @@ class Command
 
         exec($this->getRaw(), $output);
 
-        if ($this->async) {
-            $this->pid = (int) $output;
-        }
-
         return new Result($output);
     }
 
@@ -97,16 +82,6 @@ class Command
             },
             $this->apps
         ));
-
-        if ($this->async) {
-            $current_os = OS::getCurrentOs();
-            if ($current_os === OS::WIN) {
-                //TODO: This is experimental and not tested
-                $command = 'start ' . $command;
-            } else {
-                $command .= ' &> /dev/null & echo $!';
-            }
-        }
 
         return $command;
     }
@@ -141,15 +116,13 @@ class Command
     }
 
     /**
-     * Enable async for this command
+     * Make the Command async
      *
-     * @return Command
+     * @return Async
      */
     public function async()
     {
-        $this->async = true;
-
-        return $this;
+        return Async::create($this);
     }
 
     /**
@@ -206,67 +179,5 @@ class Command
         $this->apps[] = $xargsApp;
 
         return $xargsApp;
-    }
-
-    /**
-     * Checks if the current command is running
-     *
-     * @return bool
-     */
-    public function isRunning()
-    {
-        if (OS::WIN === OS::getCurrentOs()) {
-            throw new OsNotSupportedExeception();
-        }
-
-        $app = new App($this, 'ps');
-        $app->arg('p')
-            ->input($this->pid);
-        
-        exec($app->getRaw(), $output);
-
-        //First line is the header. If line 1 exists, there is a process with this pid
-        return array_key_exists(1, $output);
-    }
-
-    /**
-     * Check if a command is running, which has the exact same syntax
-     *
-     * @return bool
-     */
-    public function isSimilarRunning()
-    {
-        if (OS::WIN === OS::getCurrentOs()) {
-            throw new OsNotSupportedExeception();
-        }
-
-        $app = new App($this, 'ps');
-        $app->arg('eF');
-
-        $command = implode(' | ', array_map(
-            function (App $app) {
-                return $app->getRaw();
-            },
-            $this->apps
-        ));
-
-        exec($app->getRaw(), $output);
-        $result = strpos(implode(PHP_EOL, $output), $this->prepareForPs($command));
-
-        return $result ? true : false;
-    }
-
-    /**
-     * Prepares a command to be searched in the process log
-     *
-     * @param string $command the command to be prepared
-     *
-     * @return string the prepared command
-     */
-    private function prepareForPs(string $command)
-    {
-        $command = preg_replace('#\'#', '', $command);
-
-        return preg_replace('#"#', '', $command);
     }
 }

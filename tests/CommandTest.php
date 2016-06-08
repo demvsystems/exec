@@ -125,37 +125,37 @@ class CommandTest extends PHPUnit_Framework_TestCase
 
     public function testAsync()
     {
-        $result = Command::create()
+        $async = Command::create()
             ->app('echo')
             ->input('"Hello World"')
             ->async()
             ->exec();
 
         //Because of async we are only awaiting the pid
-        $this->assertGreaterThan(0, (int) $result->getRaw());
+        $this->assertGreaterThan(0, (int) $async->getPid());
     }
 
     public function testIsRunning()
     {
-        $cmd    = Command::create();
-        $result = $cmd->phpApp()
+        $async = Command::create()
+            ->phpApp()
             ->arg('r')
             ->input('\'sleep(10);\'')
             ->async()
             ->exec();
 
-        $this->assertTrue($cmd->isRunning());
+        $this->assertTrue($async->isRunning());
     }
 
     public function testIsSimilarRunning()
     {
-        $cmd = Command::create();
-        $result = $cmd->phpApp()
+        $async = Command::create()
+            ->phpApp()
             ->arg('r')
             ->input('\'sleep(10);\'')
             ->async()
             ->exec();
 
-        $this->assertTrue($cmd->isSimilarRunning());
+        $this->assertTrue($async->isSimilarRunning());
     }
 }
