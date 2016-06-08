@@ -104,4 +104,22 @@ class CommandTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals($expected, $result->getRaw());
     }
+
+    /**
+     * Test an xargs application call
+     */
+    public function testXargsApp()
+    {
+        $expected = 'foo' . PHP_EOL . 'bar' . PHP_EOL . 'baz' . PHP_EOL;
+        $result = Command::create()
+            ->xargsApp()
+            ->input('echo', 'echo')
+            ->arg('d,')
+            ->arg('L')
+            ->arg('1', '', '')
+            ->app1()
+            ->input('foo,bar,baz')
+            ->exec();
+        $this->assertEquals($expected, $result->getRaw());
+    }
 }

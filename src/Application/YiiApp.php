@@ -2,8 +2,6 @@
 
 namespace Demv\Exec\Application;
 
-use Demv\Exec\Command;
-
 /**
  * Yii Application call
  */
@@ -11,13 +9,14 @@ class YiiApp extends App
 {
 
     /**
-     * Create a new Yii Application call with the command it belongs to 
+     * Create a new Yii Application call with the command or application it belongs 
+     * to 
      * 
-     * @param Command $command the command this application call belongs to
+     * @param Command|App $parent the command or application this application call 
+     * belongs to
      */
-    public function __construct(Command $command)
+    public function __construct($parent)
     {
-        $this->command = $command;
-        $this->name = 'php console.php';
+        parent::__construct($parent, 'php console.php');
     }
 }

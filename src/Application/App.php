@@ -2,8 +2,6 @@
 
 namespace Demv\Exec\Application;
 
-use Demv\Exec\Command;
-
 class App 
 {
     /**
@@ -22,25 +20,26 @@ class App
     protected $input;
 
     /**
-     * @var Command
+     * @var Command|App
      */
-    protected $command;
+    protected $parent;
 
     /**
-     * Create a new Application with the command it belongs to and the application 
+     * Create a new Application with the parent it belongs to and the application 
      * name
      * 
-     * @param Command $command the command this application call belongs to
+     * @param Command|App $parent the parent application or command of this 
+     * application call belongs to
      * @param string  $name    the name of the application 
      */
-    public function __construct(Command $command, string $name)
+    public function __construct($parent, string $name)
     {
-        $this->command = $command;
+        $this->parent = $parent;
         $this->name    = $name;
     }
 
     /**
-     * Magic call method delegates a method call to the command it belongs to
+     * Magic call method delegates a method call to the parent it belongs to
      * if it isn't a method of the application
      *
      * @param string $name the method name
@@ -50,7 +49,7 @@ class App
      */
     public function __call(string $name, array $args)
     {
-        return call_user_func_array([$this->command, $name], $args);
+        return call_user_func_array([$this->parent, $name], $args);
     }
 
     /**

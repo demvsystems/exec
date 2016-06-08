@@ -2,24 +2,23 @@
 
 namespace Demv\Exec\Application;
 
-use Demv\Exec\Command;
-
 class AwkApp extends App
 {
     /**
-     * Create a new Awk Application callwith the command it belongs to 
+     * Create a new Awk Application call with the command or application it belongs 
+     * to 
      * 
-     * @param Command $command the command this application call belongs to
+     * @param Command|App $parent the command or application this application call 
+     * belongs to
      */
-    public function __construct(Command $command)
+    public function __construct($parent)
     {
-        $this->command = $command;
-        $this->name    = 'awk';
+        parent::__construct($parent, 'awk');
     }
 
     /**
-     * Magic call method delegates a method call to the command it belongs to
-     * if it isn't a method of the application
+     * Magic call method delegates a method call to the application or command it 
+     * belongs to if it isn't a method of the application
      *
      * @param string $name the method name
      * @param array  $args the method parameters
@@ -28,7 +27,7 @@ class AwkApp extends App
      */
     public function __call(string $name, array $args)
     {
-        return call_user_func_array([$this->command, $name], $args);
+        return call_user_func_array([$this->parent, $name], $args);
     }
 
     /**

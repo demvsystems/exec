@@ -6,8 +6,9 @@ use Demv\Exec\Application\App;
 use Demv\Exec\Application\AwkApp;
 use Demv\Exec\Application\PhpApp;
 use Demv\Exec\Application\YiiApp;
-use Demv\Exec\Exception\OsNoMatchException;
-use Demv\Exec\Result\Result;
+use Demv\Exec\Application\XargsApp;
+
+use Demv\Exec\Exception\OsNoMatchException; use Demv\Exec\Result\Result;
 
 /**
  * The command is the highest unit, which consists of one or more application calls
@@ -151,5 +152,19 @@ class Command
         $this->apps[] = $awkApp;
 
         return $awkApp;
+    }
+
+    /**
+     * Add a call to xargs
+     *
+     * @return XargsApp
+     */
+    public function xargsApp()
+    {
+        $xargsApp = new XargsApp($this);
+
+        $this->apps[] = $xargsApp;
+
+        return $xargsApp;
     }
 }
