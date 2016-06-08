@@ -3,7 +3,9 @@
 namespace Demv\Exec;
 
 use Demv\Exec\Application\App;
+use Demv\Exec\Application\AwkApp;
 use Demv\Exec\Application\PhpApp;
+use Demv\Exec\Application\YiiApp;
 use Demv\Exec\Exception\OsNoMatchException;
 use Demv\Exec\Result\Result;
 
@@ -109,6 +111,11 @@ class Command
         return $this;
     }
 
+    /**
+     * Add a call to PHP 
+     *
+     * @return PhpApp
+     */
     public function phpApp()
     {
         $phpApp = new PhpApp($this);
@@ -116,5 +123,33 @@ class Command
         $this->apps[] = $phpApp;
 
         return $phpApp;
+    }
+
+    /**
+     * Add a call to Yii's console application
+     *
+     * @return YiiApp
+     */
+    public function yiiApp()
+    {
+        $yiiApp = new YiiApp($this);
+
+        $this->apps[] = $yiiApp;
+
+        return $yiiApp;
+    }
+
+    /**
+     * Add a call Awk 
+     *
+     * @return AwkApp
+     */
+    public function awkApp()
+    {
+        $awkApp = new AwkApp($this);
+
+        $this->apps[] = $awkApp;
+
+        return $awkApp;
     }
 }

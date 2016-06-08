@@ -86,4 +86,22 @@ class CommandTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals('PHP', substr($result->getRaw(), 0, 3));
     }
+
+    /**
+     * Test an awk application call
+     */
+    public function testAwkApp()
+    {
+        $input = 'foo bar';
+        $expected = 'bar';
+
+        $result = Command::create()
+            ->app('echo')
+            ->input($input)
+            ->awkApp()
+            ->input('print $2;')
+            ->exec();
+
+        $this->assertEquals($expected, $result->getRaw());
+    }
 }

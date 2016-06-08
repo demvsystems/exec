@@ -4,7 +4,7 @@ namespace Demv\Exec\Application;
 
 use Demv\Exec\Command;
 
-class App
+class App 
 {
     /**
      * @var string
@@ -14,17 +14,17 @@ class App
     /**
      * @var array
      */
-    private $args = [];
+    protected $args = [];
 
     /**
      * @var string
      */
-    private $input;
+    protected $input;
 
     /**
      * @var Command
      */
-    private $command;
+    protected $command;
 
     /**
      * Create a new Application with the command it belongs to and the application 
