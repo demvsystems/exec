@@ -3,6 +3,7 @@
 namespace Demv\Exec;
 
 use Demv\Exec\Application\App;
+use Demv\Exec\Exception\OsNotSupportedExeception;
 
 class Async
 {
@@ -49,7 +50,6 @@ class Async
      */
     public function __call(string $name, array $args)
     {
-        var_dump($name);
         return call_user_func_array([$this->command, $name], $args);
     }
 
