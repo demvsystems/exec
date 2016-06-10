@@ -5,7 +5,7 @@ namespace Demv\Exec\Application;
 /**
  * PHP Application call 
  */
-class PhpApp extends App
+final class PhpApp extends App
 {
     /**
      * Create a new PHP Application call with the command or application it belongs 

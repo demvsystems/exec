@@ -5,7 +5,7 @@ namespace Demv\Exec;
 use Demv\Exec\Application\App;
 use Demv\Exec\Exception\OsNotSupportedExeception;
 
-class Async
+final class Async
 {
     /**
      * @var Command
@@ -113,7 +113,7 @@ class Async
 
         $result = strpos(
             $result->getRaw(),
-            $this->prepareForPs($this->command->getRaw())
+            $this->prepareForProcessLog($this->command->getRaw())
         );
 
         return $result ? true : false;
@@ -148,7 +148,7 @@ class Async
      *
      * @return string the prepared command
      */
-    private function prepareForPs(string $command)
+    private function prepareForProcessLog(string $command)
     {
         $command = preg_replace('#\'#', '', $command);
 

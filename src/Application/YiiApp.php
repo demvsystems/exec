@@ -5,7 +5,7 @@ namespace Demv\Exec\Application;
 /**
  * Yii Application call
  */
-class YiiApp extends App
+final class YiiApp extends App
 {
 
     /**

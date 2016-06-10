@@ -13,7 +13,7 @@ use Demv\Exec\Result\Result;
 /**
  * The command is the highest unit, which consists of one or more application calls
  */
-class Command
+final class Command
 {
     /**
      * @var array

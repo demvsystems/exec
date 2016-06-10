@@ -2,7 +2,7 @@
 
 namespace Demv\Exec\Application;
 
-class AwkApp extends App
+final class AwkApp extends App
 {
     /**
      * Create a new Awk Application call with the command or application it belongs 

@@ -5,7 +5,7 @@ namespace Demv\Exec\Exception;
 /**
  * Exception if a commands restricted OS isn't matching the executing OS
  */
-class OsNoMatchException extends \Exception
+final class OsNoMatchException extends \Exception
 {
     public function __construct()
     {

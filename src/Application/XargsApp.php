@@ -2,7 +2,7 @@
 
 namespace Demv\Exec\Application;
 
-class XargsApp extends App {
+final class XargsApp extends App {
 
     /**
      * @var App
