@@ -38,10 +38,10 @@ class CommandTest extends PHPUnit_Framework_TestCase
 
     /**
      * Test the OS restriction of the command
+     * @expectedException Demv\Exec\Exception\OsNoMatchException
      */
     public function testWrongOs()
     {
-        $this->expectException(OsNoMatchException::class);
         $input    = 'Hello World';
         $os       = strtoupper(substr(PHP_OS, 0, 3));
         $wrong_os = $os === OS::WIN ? OS::LINUX : OS::WIN;

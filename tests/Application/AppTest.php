@@ -13,7 +13,7 @@ class AppTest extends PHPUnit_Framework_TestCase
         $expected = 'Hello' . PHP_EOL . 'World';
         $result   = Command::create()
             ->app('echo')
-            ->arg('e')
+            ->arg('n')
             ->input($input)
             ->exec();
 
