@@ -67,7 +67,7 @@ class App
      *
      * @param string $input
      *
-     * @return Application
+     * @return App
      */
     public function input(string $input)
     {
@@ -98,7 +98,7 @@ class App
      * @param string $value the value of the argument if any
      * @param string $pre   is the argument introduced by an - or --. Defaults to -
      *
-     * @return Application
+     * @return App
      */
     public function arg(string $name, $value = '', $pre = '-')
     {
