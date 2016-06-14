@@ -89,7 +89,7 @@ final class Async
             //TODO: This is experimental and not tested
             $command = 'start ' . $command;
         } else {
-            $command .= ' &> /dev/null & echo $!';
+            $command = $command . ' > /dev/null 2>&1 & echo $!';
         }
 
         return $command;
@@ -108,7 +108,7 @@ final class Async
 
         $result = Command::create()
             ->app('ps')
-            ->arg('eF')
+            ->input('aux')
             ->exec();
 
         $result = strpos(
