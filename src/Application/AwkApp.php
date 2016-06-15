@@ -25,7 +25,7 @@ final class AwkApp extends App
      *
      * @return mixed
      */
-    public function __call(string $name, array $args)
+    public function __call(/*string*/ $name, /*array*/ $args)
     {
         return call_user_func_array([$this->parent, $name], $args);
     }
@@ -38,7 +38,7 @@ final class AwkApp extends App
      *
      * @return Application
      */
-    public function input(string $input)
+    public function input(/*string*/ $input)
     {
         $this->input = sprintf('%s%s%s',  '\'{', $input, '}\'');
 

@@ -93,7 +93,7 @@ final class Command
      *
      * @return App
      */
-    public function app(string $name)
+    public function app(/*string*/ $name)
     {
         $app          = new App($this, $name);
         $this->apps[] = $app;
@@ -108,7 +108,7 @@ final class Command
      *
      * @return Command
      */
-    public function setOS(string $os)
+    public function setOS(/*string*/ $os)
     {
         $this->os = $os;
 

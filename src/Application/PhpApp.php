@@ -28,7 +28,7 @@ final class PhpApp extends App
      *
      * @return mixed
      */
-    public function __call(string $name, array $args)
+    public function __call(/*string*/ $name, /*array*/ $args)
     {
         return call_user_func_array([$this->parent, $name], $args);
     }

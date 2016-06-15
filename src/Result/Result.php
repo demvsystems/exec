@@ -11,7 +11,7 @@ class Result
      *
      * @param array $raw lines of a result as an array
      */
-    public function __construct(array $raw)
+    public function __construct(/*array*/ $raw)
     {
         $this->raw = $raw;
     }

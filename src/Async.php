@@ -48,7 +48,7 @@ final class Async
      *
      * @return mixed
      */
-    public function __call(string $name, array $args)
+    public function __call(/*string*/ $name, /*array*/ $args)
     {
         return call_user_func_array([$this->command, $name], $args);
     }
@@ -148,7 +148,7 @@ final class Async
      *
      * @return string the prepared command
      */
-    private function prepareForProcessLog(string $command)
+    private function prepareForProcessLog(/*string*/ $command)
     {
         $command = preg_replace('#\'#', '', $command);
 

@@ -35,7 +35,7 @@ final class XargsApp extends App {
      *
      * @return mixed
      */
-    public function __call(string $name, array $args)
+    public function __call(/*string*/ $name, /*array*/ $args)
     {
         return call_user_func_array([$this->parent, $name], $args);
     }
@@ -48,7 +48,7 @@ final class XargsApp extends App {
      *
      * @return Application
      */
-    public function input(string $app1, $app2 = '')
+    public function input(/*string*/ $app1, $app2 = '')
     {
         $this->app1 = new App($this, $app1);
         $this->app2 = new App($this, $app2);

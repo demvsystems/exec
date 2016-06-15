@@ -32,7 +32,7 @@ class App
      * application call belongs to
      * @param string  $name    the name of the application 
      */
-    public function __construct($parent, string $name)
+    public function __construct($parent, /*string*/ $name)
     {
         $this->parent = $parent;
         $this->name    = $name;
@@ -47,7 +47,7 @@ class App
      *
      * @return mixed
      */
-    public function __call(string $name, array $args)
+    public function __call(/*string*/ $name, /*array*/ $args)
     {
         return call_user_func_array([$this->parent, $name], $args);
     }
@@ -69,7 +69,7 @@ class App
      *
      * @return App
      */
-    public function input(string $input)
+    public function input(/*string*/ $input)
     {
         $this->input = $input;
 
@@ -100,7 +100,7 @@ class App
      *
      * @return App
      */
-    public function arg(string $name, $value = '', $pre = '-')
+    public function arg(/*string*/ $name, $value = '', $pre = '-')
     {
         $arg = $pre . $name;
         if (!empty($value)) {
