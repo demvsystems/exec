@@ -4,55 +4,9 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2571f9852030029c99009e867dd5c5b0",
-    "content-hash": "86028456e4066b59d6a8125000b661e0",
-    "packages": [
-        {
-            "name": "demvsystems/core",
-            "version": "0.1.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/demvsystems/core.git",
-                "reference": "00c6dddde7407c291616df35b8f586f778d0fd4e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/demvsystems/core/zipball/00c6dddde7407c291616df35b8f586f778d0fd4e",
-                "reference": "00c6dddde7407c291616df35b8f586f778d0fd4e",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.5.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "5.*.*"
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "src/core.php",
-                    "src/typehint.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Randy Schütt <r.schuett@demv.de>, Marcel Patzwahl <m.patzwahl@demv.de>",
-                    "email": "developer@demv.de",
-                    "homepage": "https://github.com/demvsystems"
-                }
-            ],
-            "description": "Core functions and functionalities used for the other projects",
-            "homepage": "https://github.com/demvsystems/core",
-            "keywords": [
-                "core"
-            ],
-            "time": "2016-06-07 10:49:50"
-        }
-    ],
+    "hash": "061264ce7673684407168f068c2a5b96",
+    "content-hash": "2773dccf3a8ed1f9aa08a0bc4e7f8f50",
+    "packages": [],
     "packages-dev": [
         {
             "name": "doctrine/instantiator",
@@ -1060,16 +1014,16 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v3.1.0",
+            "version": "v3.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "eca51b7b65eb9be6af88ad7cc91685f1556f5c9a"
+                "reference": "c5a7e7fc273c758b92b85dcb9c46149ccda89623"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/eca51b7b65eb9be6af88ad7cc91685f1556f5c9a",
-                "reference": "eca51b7b65eb9be6af88ad7cc91685f1556f5c9a",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/c5a7e7fc273c758b92b85dcb9c46149ccda89623",
+                "reference": "c5a7e7fc273c758b92b85dcb9c46149ccda89623",
                 "shasum": ""
             },
             "require": {
@@ -1105,7 +1059,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2016-05-26 21:46:24"
+            "time": "2016-06-14 11:18:07"
         },
         {
             "name": "webmozart/assert",
