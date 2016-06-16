@@ -2,7 +2,7 @@
 
 namespace Demv\Exec\Application;
 
-class App 
+class App
 {
     /**
      * @var string
@@ -26,21 +26,21 @@ class App
 
     /**
      * Create a new Application with the parent it belongs to and the application 
-     * name
+     * name.
      * 
      * @param Command|App $parent the parent application or command of this 
-     * application call belongs to
-     * @param string  $name    the name of the application 
+     *                            application call belongs to
+     * @param string      $name   the name of the application 
      */
     public function __construct($parent, /*string*/ $name)
     {
         $this->parent = $parent;
-        $this->name    = $name;
+        $this->name = $name;
     }
 
     /**
      * Magic call method delegates a method call to the parent it belongs to
-     * if it isn't a method of the application
+     * if it isn't a method of the application.
      *
      * @param string $name the method name
      * @param array  $args the method parameters
@@ -53,7 +53,7 @@ class App
     }
 
     /**
-     * Return the name of the application
+     * Return the name of the application.
      *
      * @return string
      */
@@ -77,22 +77,25 @@ class App
     }
 
     /**
-     * Returns the raw application call as a string
+     * Returns the raw application call as a string.
      *
      * @return string
      */
     public function getRaw()
     {
-        return sprintf(
-            '%s %s %s',
-            $this->name,
-            implode(' ', $this->args),
-            $this->input
-        );
+        $raw = $this->name;
+        if (!empty($this->args)) {
+            $raw = sprintf('%s %s', $raw, implode(' ', $this->args));
+        }
+        if (!empty($this->input)) {
+            $raw = sprintf('%s %s', $raw, $this->input);
+        }
+
+        return $raw;
     }
 
     /**
-     * Adds an argument to the application call
+     * Adds an argument to the application call.
      *
      * @param string $name  the argument name
      * @param string $value the value of the argument if any
@@ -102,9 +105,9 @@ class App
      */
     public function arg(/*string*/ $name, $value = '', $pre = '-')
     {
-        $arg = $pre . $name;
+        $arg = $pre.$name;
         if (!empty($value)) {
-            $arg .= '=' . $value;
+            $arg .= '='.$value;
         }
 
         $this->args[] = $arg;

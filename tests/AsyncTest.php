@@ -32,6 +32,8 @@ class AsyncTest extends PHPUnit_Framework_TestCase
             ->exec();
 
         $this->assertTrue($async->isRunning());
+        sleep(11);
+        $this->assertFalse($async->isRunning());
     }
 
     /**
@@ -47,5 +49,7 @@ class AsyncTest extends PHPUnit_Framework_TestCase
             ->exec();
 
         $this->assertTrue($async->isSimilarRunning());
+        sleep(10);
+        $this->assertFalse($async->isSimilarRunning());
     }
 }
