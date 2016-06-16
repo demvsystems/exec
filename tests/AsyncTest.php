@@ -52,4 +52,26 @@ class AsyncTest extends PHPUnit_Framework_TestCase
         sleep(10);
         $this->assertFalse($async->isSimilarRunning());
     }
+
+    /**
+     * Test if async output is written to alternative paths
+     */
+    public function testPath()
+    {
+        $path = 'test.txt';
+        $expected = 'Hallo Welt';
+
+        $async = Command::create()
+            ->app('echo')
+            ->input($expected)
+            ->async()
+            ->path($path)
+            ->exec();
+
+        $this->assertFileExists($path);
+        $this->assertEquals($expected, trim(file_get_contents($path)));
+        if (file_exists($path)) {
+            unlink($path);
+        }
+    }
 }

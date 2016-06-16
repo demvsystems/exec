@@ -18,6 +18,11 @@ final class Async
     private $pid = 0;
 
     /**
+     * @var string
+     */
+    private $path = '/dev/null';
+
+    /**
      * Create an Async Object for the given command
      *
      * @param Command $command
@@ -89,10 +94,17 @@ final class Async
             //TODO: This is experimental and not tested
             $command = 'start ' . $command;
         } else {
-            $command .= ' > /dev/null 2>&1 & echo $!';
+            $command .= ' > ' . $this->path . ' 2>&1 & echo $!';
         }
 
         return $command;
+    }
+
+    public function path(/*string*/ $path)
+    {
+        $this->path = $path;
+
+        return $this;
     }
 
     /**
