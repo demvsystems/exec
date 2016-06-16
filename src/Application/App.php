@@ -35,7 +35,7 @@ class App
     public function __construct($parent, /*string*/ $name)
     {
         $this->parent = $parent;
-        $this->name = $name;
+        $this->name   = $name;
     }
 
     /**
@@ -105,9 +105,9 @@ class App
      */
     public function arg(/*string*/ $name, $value = '', $pre = '-')
     {
-        $arg = $pre.$name;
+        $arg = $pre . $name;
         if (!empty($value)) {
-            $arg .= '='.$value;
+            $arg .= '=' . $value;
         }
 
         $this->args[] = $arg;

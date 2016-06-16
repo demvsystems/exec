@@ -26,7 +26,7 @@ class AppTest extends PHPUnit_Framework_TestCase
     public function testGetRaw()
     {
         $expected = 'ls';
-        $result = Command::create()
+        $result   = Command::create()
             ->app('ls')
             ->getRaw();
 
@@ -39,7 +39,7 @@ class AppTest extends PHPUnit_Framework_TestCase
     public function testGetRawWithInput()
     {
         $expected = 'echo Hallo Welt';
-        $result = Command::create()
+        $result   = Command::create()
             ->app('echo')
             ->input('Hallo Welt')
             ->getRaw();
@@ -53,7 +53,7 @@ class AppTest extends PHPUnit_Framework_TestCase
     public function testGetRawWithArgs()
     {
         $expected = 'ls -a --block-size=M';
-        $result = Command::create()
+        $result   = Command::create()
             ->app('ls')
             ->arg('a')
             ->arg('block-size', 'M', '--')
@@ -68,7 +68,7 @@ class AppTest extends PHPUnit_Framework_TestCase
     public function testGetRawWithArgsAndInput()
     {
         $expected = 'echo -e Hallo Welt';
-        $result = Command::create()
+        $result   = Command::create()
             ->app('echo')
             ->arg('e')
             ->input('Hallo Welt')

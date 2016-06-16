@@ -71,7 +71,7 @@ final class Async
     public function exec()
     {
         exec($this->getRaw(), $output);
-        $this->pid = (int) $output;
+        $this->pid = (int) $output[0];
 
         return $this;
     }
