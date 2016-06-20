@@ -46,9 +46,6 @@ class Arg
                 case '-':
                     $raw .= ' ' . $this->value;
                     break;
-                case '--':
-                    $raw .= '=' . $this->value;
-                    break;
                 default:
                     $raw .= '=' . $this->value;
                     break;
