@@ -63,11 +63,16 @@ final class XargsApp extends App {
      */
     public function getRaw()
     {
+        $args = '';
+        foreach ($this->args as $arg) {
+            $args = sprintf('%s %s', $args, $arg->getRaw());
+        }
+
         return sprintf(
             '%s | %s %s %s',
             $this->app1->getRaw(),
-            $this->name, 
-            implode(' ', $this->args),
+            $this->name,
+            $args,
             $this->app2->getRaw()
         );
     }

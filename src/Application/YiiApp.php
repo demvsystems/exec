@@ -105,8 +105,8 @@ final class YiiApp extends App
         if (!empty($this->action)) {
             $raw = sprintf('%s %s', $raw, $this->action);
         }
-        if (!empty($this->args)) {
-            $raw = sprintf('%s %s', $raw, implode(' ', $this->args));
+        foreach ($this->args as $arg) {
+            $raw = sprintf('%s %s', $raw, $arg->getRaw());
         }
         if (!empty($this->input)) {
             $raw = sprintf('%s %s', $raw, $this->input);

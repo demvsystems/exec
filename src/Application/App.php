@@ -2,6 +2,8 @@
 
 namespace Demv\Exec\Application;
 
+use Demv\Exec\Arg;
+
 class App
 {
     /**
@@ -63,7 +65,7 @@ class App
     }
 
     /**
-     * Input for the application call. 
+     * Input for the application call.
      *
      * @param string $input
      *
@@ -84,8 +86,8 @@ class App
     public function getRaw()
     {
         $raw = $this->name;
-        if (!empty($this->args)) {
-            $raw = sprintf('%s %s', $raw, implode(' ', $this->args));
+        foreach ($this->args as $arg) {
+            $raw = sprintf('%s %s', $raw, $arg->getRaw());
         }
         if (!empty($this->input)) {
             $raw = sprintf('%s %s', $raw, $this->input);
@@ -105,10 +107,10 @@ class App
      */
     public function arg(/*string*/ $name, $value = '', $pre = '-')
     {
-        $arg = $pre . $name;
-        if (!empty($value)) {
-            $arg .= '=' . $value;
-        }
+        $arg = new Arg();
+        $arg->setName($name);
+        $arg->setValue($value);
+        $arg->setPre($pre);
 
         $this->args[] = $arg;
 
