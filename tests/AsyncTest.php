@@ -74,4 +74,30 @@ class AsyncTest extends PHPUnit_Framework_TestCase
             unlink($path);
         }
     }
+
+    public function testKill()
+    {
+        $async = Command::create()
+            ->phpApp()
+            ->arg('r')
+            ->input('\'sleep(10);\'')
+            ->async()
+            ->exec();
+        $this->assertTrue($async->isRunning());
+        $async->kill();
+        $this->assertFalse($async->isRunning());
+    }
+
+    public function testKillSimilar()
+    {
+        $async = Command::create()
+            ->phpApp()
+            ->arg('r')
+            ->input('\'sleep(10);\'')
+            ->async()
+            ->exec();
+        $this->assertTrue($async->isSimilarRunning());
+        $async->killSimilar();
+        $this->assertFalse($async->isSimilarRunning());
+    }
 }

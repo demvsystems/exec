@@ -2,8 +2,8 @@
 
 namespace Demv\Exec\Application;
 
-final class XargsApp extends App {
-
+final class XargsApp extends App
+{
     /**
      * @var App
      */
@@ -19,7 +19,7 @@ final class XargsApp extends App {
      * it belongs to 
      * 
      * @param Command|App $parent the command or application this application call 
-     * belongs to
+     *                            belongs to
      */
     public function __construct($parent)
     {
@@ -44,14 +44,15 @@ final class XargsApp extends App {
      * Receives the names of two applications. The first will be applied to the 
      * second application
      *
-     * @param string $input
+     * @param string $app1 The first app as a string
+     * @param string $app2 The second app as a string
      *
      * @return Application
      */
     public function input(/*string*/ $app1, $app2 = '')
     {
-        $this->app1 = new App($this, $app1);
-        $this->app2 = new App($this, $app2);
+        $this->app1 = $this->createKnownApp($app1);
+        $this->app2 = $this->createKnownApp($app2);
 
         return $this;
     }
@@ -95,5 +96,23 @@ final class XargsApp extends App {
     public function app2()
     {
         return $this->app2;
+    }
+
+    /**
+     * Checks if the given app is known. If it is the appropiate object is built
+     * and returned, otherwise a default app is created
+     */
+    private function createKnownApp(/*string*/ $app)
+    {
+        switch ($app) {
+            case 'awk':
+                return new AwkApp($this);
+            case 'php':
+                return new PhpApp($this);
+            case 'yii':
+                return new YiiApp($this);
+            default:
+                return new App($this, $app);
+        }
     }
 }

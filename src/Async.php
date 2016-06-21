@@ -3,6 +3,7 @@
 namespace Demv\Exec;
 
 use Demv\Exec\Application\App;
+use Demv\Exec\Application\AwkApp;
 use Demv\Exec\Exception\OsNotSupportedExeception;
 
 final class Async
@@ -150,6 +151,42 @@ final class Async
 
         //First line is the header. If line 1 exists, there is a process with this pid
         return array_key_exists(1, explode(PHP_EOL, $result->getRaw()));
+    }
+
+    /**
+     * Kills the Command if it is running
+     */
+    public function kill()
+    {
+        if (OS::WIN === OS::getCurrentOs()) {
+            throw new OsNotSupportedExeception();
+        }
+
+        $result = Command::create()
+            ->app('kill')
+            ->input($this->pid)
+            ->exec();
+    }
+
+    /**
+     * Kills commands, which syntax is similar to this command
+     */
+    public function killSimilar()
+    {
+        if (OS::WIN === OS::getCurrentOs()) {
+            throw new OsNotSupportedExeception();
+        }
+
+        $command = Command::create()
+            ->app('ps')
+            ->arg('aux')
+            ->app('grep')
+            ->input('"' . $this->prepareForProcessLog($this->command->getRaw()) . '"')
+            ->xargsApp()
+            ->input('awk', 'kill')
+            ->app1()
+            ->input('print $2')
+            ->exec();
     }
 
 
