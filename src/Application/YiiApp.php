@@ -10,7 +10,7 @@ final class YiiApp extends App
     /**
      * @var string
      */
-    private $script = 'console.php';
+    private $script = '../console.php';
 
     /**
      * @var string
