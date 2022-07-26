@@ -2,7 +2,7 @@
 
 namespace Demv\Exec\Exception;
 
-final class OsNotSupportedExeception extends \Exception {
+final class OsNotSupportedException extends \Exception {
 
     public function __construct()
     {

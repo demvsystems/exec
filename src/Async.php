@@ -4,7 +4,7 @@ namespace Demv\Exec;
 
 use Demv\Exec\Application\App;
 use Demv\Exec\Application\AwkApp;
-use Demv\Exec\Exception\OsNotSupportedExeception;
+use Demv\Exec\Exception\OsNotSupportedException;
 
 final class Async
 {
@@ -116,7 +116,7 @@ final class Async
     public function isSimilarRunning()
     {
         if (OS::WIN === OS::getCurrentOs()) {
-            throw new OsNotSupportedExeception();
+            throw new OsNotSupportedException();
         }
 
         $result = Command::create()
@@ -140,7 +140,7 @@ final class Async
     public function isRunning()
     {
         if (OS::WIN === OS::getCurrentOs()) {
-            throw new OsNotSupportedExeception();
+            throw new OsNotSupportedException();
         }
 
         $result = Command::create()
@@ -159,7 +159,7 @@ final class Async
     public function kill()
     {
         if (OS::WIN === OS::getCurrentOs()) {
-            throw new OsNotSupportedExeception();
+            throw new OsNotSupportedException();
         }
 
         $result = Command::create()
@@ -174,7 +174,7 @@ final class Async
     public function killSimilar()
     {
         if (OS::WIN === OS::getCurrentOs()) {
-            throw new OsNotSupportedExeception();
+            throw new OsNotSupportedException();
         }
 
         $command = Command::create()
